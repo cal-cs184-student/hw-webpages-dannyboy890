@@ -53,11 +53,11 @@
 		<h2>Section I: Bezier Curves and Surfaces</h2>
 
 		<h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
-		Bezier curves can be generated using de Casteljau's algorithm. Given *n* control points and a parameter *t* whose value is between 0 and 1, this algorithm uses a recursive computation to generate a point on the Bezier curve. 
+		Bezier curves can be generated using de Casteljau's algorithm. Given <i>n</i> control points and a parameter <i>t</i> whose value is between 0 and 1, this algorithm uses a recursive computation to generate a point on the Bezier curve. 
 
-		Starting with *n* points, *n-1* points are generated on the lines that connect the original *n* points. These new points are a distance between the original points that is proportional to the parameter *t*. Once those new points are calculated, the process repeats until a single point is reached. This is the point that is on the Bezier curve. The original points are called *control points*.
+		Starting with <i>n</i> points, <i>n-1</i> points are generated on the lines that connect the original points. These new points are a distance between the original points that is proportional to the parameter <i>t</i>. Once those new points are calculated, the process repeats until a single point is reached. This is the point that is on the Bezier curve. The original points are called <i>control points</i>.
 
-		In our implementation, we take the points from the input and first check how many there are. If there's 2 or more, then the algorithm is implemented using the parameter *t* defined in the 'BezierCurve' class. Once the new points have been calculated, they are added to the vector using 'push_back()'.
+		In our implementation, we take the points from the input and first check how many there are. If there's 2 or more, then the algorithm is implemented using the parameter <i>t</i> defined in the 'BezierCurve' class. Once the new points have been calculated, they are added to the vector using <mark>push_back()</mark>.
 		<!--
 		Insert screenshots here
 		-->
@@ -66,21 +66,29 @@
 			  <tr>
 				<td style="text-align: center;">
 				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <figcaption>6 control points.</figcaption>
 				</td>
 				<td style="text-align: center;">
 				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <figcaption>First interpolation step.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="teapot.png" width="400px"/>
+				  <figcaption>Second interpolation step.</figcaption>
 				</td>
 			  </tr>
 			  <tr>
 				<td style="text-align: center;">
 				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <figcaption>Third interpolation step.</figcaption>
 				</td>
 				<td style="text-align: center;">
 				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <figcaption>Fourth interpolation step.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="teapot.png" width="400px"/>
+				  <figcaption>Fifth interpolation step.</figcaption>
 				</td>
 			  </tr>
 			</table>
