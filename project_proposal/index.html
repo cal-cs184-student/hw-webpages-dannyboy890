@@ -1,17 +1,35 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CS 184 Project Proposal</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Sans+Pro:400,700" rel="stylesheet">
+	<script>
+		window.MathJax = {
+			tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+		};
+	</script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
 	<style>
+		:root {
+			--primary-color: #121212;
+			--accent-color: #007bff;
+			--bg-color: #ffffff;
+		}
+
 		body {
-			background-color: white;
-			padding: 100px;
-			width: 1000px;
+			background-color: var(--bg-color);
+			padding: 40px 20px;
+			max-width: 800px;
 			margin: auto;
-			text-align: left;
+			line-height: 1.6;
 			font-weight: 300;
 			font-family: 'Open Sans', sans-serif;
-			color: #121212;
+			color: var(--primary-color);
 		}
 
 		h1,
@@ -19,94 +37,151 @@
 		h3,
 		h4 {
 			font-family: 'Source Sans Pro', sans-serif;
+			text-align: center;
+		}
+
+		h1 {
+			margin-bottom: 0.2em;
+		}
+
+		h2 {
+			margin-top: 2em;
+			border-bottom: 1px solid #eee;
+			padding-bottom: 10px;
+		}
+
+		a {
+			color: var(--accent-color);
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		.url-box {
+			word-break: break-all;
+			font-size: 0.9em;
+			background: #f8f9fa;
+			padding: 10px;
+			border-radius: 5px;
+		}
+
+		ul {
+			margin-bottom: 20px;
+		}
+
+		li {
+			margin-bottom: 8px;
+		}
+
+		.resources-list a {
+			display: block;
+			margin-bottom: 5px;
 		}
 
 		kbd {
-			color: #121212;
+			background: #eee;
+			padding: 2px 4px;
+			border-radius: 3px;
+			color: var(--primary-color);
 		}
 	</style>
-	<title>CS 184 Project Proposal</title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
-
-	<script>
-		MathJax = {
-			tex: {
-				inlineMath: [['$', '$'], ['\\(', '\\)']]
-			}
-		};
-	</script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-	</script>
-
 </head>
-
 
 <body>
 
-	<h1 align="middle">CS 184: Spring 2026</h1>
-	<h1 align="middle">Final Project Proposal - Volumetric Scattering</h1>
-	<h2 align="middle">Daniel Grover, Rayyan Saiyed, Iris Li, Idhant Gulati</h2>
+	<header>
+		<h1>CS 184: Spring 2026</h1>
+		<h1>Final Project Proposal: Volumetric Scattering</h1>
+		<h3>Daniel Grover, Rayyan Saiyed, Iris Li, Idhant Gulati</h3>
 
-	<!-- Add Website URL -->
-	<h2 align="middle">Website URL: <a
-			href="https://cal-cs184-student.github.io/hw-webpages-dannyboy890/project_proposal/index.html">https://cal-cs184-student.github.io/hw-webpages-dannyboy890/project_proposal/index.html</a>
-	</h2>
+		<div class="url-box">
+			<strong>Website URL:</strong>
+			<a href="https://cal-cs184-student.github.io/hw-webpages-dannyboy890/project_proposal/index.html">
+				https://cal-cs184-student.github.io/hw-webpages-dannyboy890/project_proposal/index.html
+			</a>
+		</div>
+	</header>
 
-	<h2 id="problem-description">Problem Description</h2>
-	<p>The rendering engine that we worked on for HW3 has a big limitation - it works under the assumption that light
-		will only scatter once it hits a surface. However, this is not the case in certain conditions like fog or haze.
-		In this case, light may scatter before it hits a surface. This can help improve the realism and the capability
-		of the ray tracing engine that we have already worked on. This is more difficult, however, as it requires more
-		computation power and is more complex to implement due to rays having to interact with particles in the space
-		between surfaces.</p>
-	<h2 id="goals-and-deliverables">Goals and Deliverables</h2>
-	<p>There will be two images we aim to render correctly for this project. First, a laser shining in a Cornell box
-		with uniformly distributed fog. Without volumetric scattering, this would just appear as a dot on the wall.
-		<em>With</em> volumetric scattering, we should see the beam of light as it travels across the box. Second, a
-		more realistic rendering of a streetlight on a foggy night. This will have a more widespread light source with
-		nonuniform fog in the scene. We can compare our renders with ones done by online renderers like Mitsuba 3, both
-		to check accuracy of the render and runtimes. We plan to answer the question of how we can update our existing
-		ray tracer to also do volumetric scattering.
-	</p>
-	<p>If we are able to, we can also implement a system to adjust parameters with the fog and how light interacts with
-		it via a GUI - increasing fog density, adjusting the Russian Roulette parameters, etc. This GUI could render a
-		low-fidelity preview for the user before rendering the full image.</p>
-	<h2 id="schedule">Schedule</h2>
-	<h3 id="week-1">Week 1</h3>
-	<ul>
-		<li>Create a structure to store the properties of the air/fog/smoke/other medium and how it interacts with light
-			(absorption, scattering, etc)</li>
-		<li>Add function to calculate transmittance of light through a medium</li>
-		<li>Combine transmittance with original ray loop of HW3 to get new color after passing through medium
-			<h3 id="week-2">Week 2</h3>
-		</li>
-		<li>Change medium to be non-uniform in density, and write function to query density at a given point</li>
-		<li>Update ray loop to check density's effect on transmittance at each time step</li>
-		<li>Update bounding boxes to increase performance</li>
-	</ul>
-	<h3 id="week-3">Week 3</h3>
-	<ul>
-		<li>Implement phase function to determine how light scatters when it hits a particle</li>
-		<li>Use shadow rays from intersection of rays to light source to attenuate light as it moves through medium</li>
-		<li>Reduce noise by picking new ray directions according to phase function instead of randomly</li>
-	</ul>
-	<h3 id="week-4">Week 4</h3>
-	<ul>
-		<li>Allow rays to bounce off of volume particles</li>
-		<li>Update russian roulette for volumetric rendering</li>
-		<li>Final renders to display engine's capabilities</li>
-	</ul>
-	<h2 id="resources">Resources</h2>
-	<p><a href="https://cs184.eecs.berkeley.edu/sp26/hw/hw3/">HW3 Path Tracer</a>
-		<a href="https://www.mitsuba-renderer.org/">Mitsuba 3</a>
-		<a href="https://cs.dartmouth.edu/~wjarosz/publications/dissertation/chapter4.pdf">Wojciech Jarosz's Thesis -
-			Chapter 4</a>
-		<a href="http://luthuli.cs.uiuc.edu/~daf/courses/rendering/papers/lafortune96rendering.pdf">Lafortune and
-			Willems paper on volumetric scattering</a>
-	</p>
+	<main>
+		<section>
+			<h2 id="problem-description">Problem Description</h2>
+			<p>
+				The rendering engine from HW3 has a significant limitation: it assumes light only scatters upon hitting
+				a surface.
+				In reality, phenomena like fog, haze, or smoke cause light to scatter <em>before</em> reaching a solid
+				object.
+				Implementing volumetric scattering enhances realism but introduces complexity, as rays must now interact
+				with
+				particles throughout the medium, requiring significantly more computational power.
+			</p>
+		</section>
 
+		<section>
+			<h2 id="goals-and-deliverables">Goals and Deliverables</h2>
+			<p>
+				Our primary goal is to render two specific scenarios accurately:
+			</p>
+			<ul>
+				<li><strong>The Cornell Laser:</strong> A laser beam traveling through uniform fog inside a Cornell box.
+					We expect to see the visible path of the beam rather than just a terminal dot on the wall.</li>
+				<li><strong>Foggy Streetlight:</strong> A realistic night scene with a wide light source and non-uniform
+					fog density.</li>
+			</ul>
+			<p>
+				We will validate our results against the <strong>Mitsuba 3</strong> renderer to compare both visual
+				accuracy
+				and runtime performance. If time permits, we plan to implement a GUI for real-time parameter adjustment
+				(e.g., fog density, Russian Roulette thresholds) with a low-fidelity preview mode.
+			</p>
+		</section>
 
-	<br><br>
+		<section>
+			<h2 id="schedule">Schedule</h2>
 
-	<body>
+			<h3>Week 1: Fundamentals</h3>
+			<ul>
+				<li>Define data structures for medium properties (absorption, scattering, etc.).</li>
+				<li>Implement transmittance calculation functions.</li>
+				<li>Integrate medium transmittance into the core HW3 ray loop.</li>
+			</ul>
+
+			<h3>Week 2: Heterogeneous Media</h3>
+			<ul>
+				<li>Implement non-uniform density support and density query functions.</li>
+				<li>Update the ray loop to account for density-step variance.</li>
+				<li>Optimize performance using specialized bounding volume hierarchies.</li>
+			</ul>
+
+			<h3>Week 3: Phase Functions & Sampling</h3>
+			<ul>
+				<li>Implement phase functions (e.g., Henyey-Greenstein) for scattering direction.</li>
+				<li>Integrate shadow rays for light attenuation through the medium.</li>
+				<li>Implement importance sampling based on the phase function to reduce noise.</li>
+			</ul>
+
+			<h3>Week 4: Final Polish</h3>
+			<ul>
+				<li>Enable multi-bounce volumetric scattering.</li>
+				<li>Refine Russian Roulette logic for volumetric paths.</li>
+				<li>Generate final high-quality renders for the showcase.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2 id="resources">Resources</h2>
+			<div class="resources-list">
+				<a href="https://cs184.eecs.berkeley.edu/sp26/hw/hw3/">HW3 Path Tracer Documentation</a>
+				<a href="https://www.mitsuba-renderer.org/">Mitsuba 3 Renderer</a>
+				<a href="https://cs.dartmouth.edu/~wjarosz/publications/dissertation/chapter4.pdf">Wojciech Jarosz's
+					Thesis (Chapter 4)</a>
+				<a href="http://luthuli.cs.uiuc.edu/~daf/courses/rendering/papers/lafortune96rendering.pdf">Lafortune &
+					Willems: Volumetric Scattering Paper</a>
+			</div>
+		</section>
+	</main>
+
+</body>
+
+</html>
